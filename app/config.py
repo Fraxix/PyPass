@@ -1,0 +1,7 @@
+#Window Config
+WINDOW_TITLE = 'PyPass'
+WINDOW_WIDTH = 900
+WINDOW_HEIGHT = 650
+
+#App Config
+APP_VERSION = '0.1.0'
