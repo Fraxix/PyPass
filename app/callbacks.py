@@ -18,6 +18,11 @@ def on_slider_changed(sender, app_data):
 def on_input_text_change(sender, app_data):
     print(f'Input text value: {app_data}')
 
+def copy_password(sender, app_data):
+    password = dpg.get_value('password_field')
+    dpg.set_clipboard_text(password)
+    dpg.set_value('copy_status', 'Successfully Copied!')
+
 def exit_app(sender, app_data):
     print('Exit PyPass clicked')
     print(f'Sender: {sender}')
