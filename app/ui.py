@@ -21,13 +21,25 @@ def render_confirm_exit_modal():
 
 def render_main_window():
     with dpg.window(tag='main_window', no_title_bar=True, no_collapse=True, no_scroll_with_mouse=True, no_scrollbar=True, no_resize=True):
-        dpg.add_button(label='Button', callback=on_button_click)
-        dpg.add_checkbox(label='Checkbox', callback=on_checkbox_tick)
-        dpg.add_slider_int(label='Slider Int', callback=on_slider_changed)
-        dpg.add_input_text(label='Input text',callback=on_input_text_change)
-        dpg.add_input_text(label='Password', default_value='Your password will appear here', tag='password_field', readonly=True)
+        with dpg.group(horizontal=True):
+            dpg.add_input_text(label='', default_value='Your password will appear here', tag='password_field', readonly=True, password=True)
+            dpg.add_checkbox(label='Show Password', callback=toggle_password_visibility, tag='show_password')
+
+        dpg.add_slider_int(label='Length', tag='password_length', default_value=12, min_value=6, max_value=32, callback=generate_password)
+
+        with dpg.group(horizontal=True):
+            dpg.add_checkbox(label='Uppercase', default_value=True, tag='include_uppercase', callback=generate_password)
+            dpg.add_checkbox(label='Lowercase', default_value=True, tag='include_lowercase', callback=generate_password)
+            dpg.add_checkbox(label='Numbers', default_value=True, tag='include_numbers',callback=generate_password)
+            dpg.add_checkbox(label='Symbols', default_value=True, tag='include_symbols', callback=generate_password)
+        
+        dpg.add_text("", tag='tmp_checkbox_info')
+
+        dpg.add_button(label='Generate Password', callback=generate_password)
         dpg.add_button(label='Copy password', callback=copy_password)
+
         with dpg.group(horizontal=True):
             dpg.add_text('Status:')
             dpg.add_text('', tag='copy_status')
+
         dpg.add_button(label='Exit PyPass',callback=lambda sender, app_data: dpg.configure_item('confirm_exit_modal', show=True))
