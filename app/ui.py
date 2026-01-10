@@ -27,6 +27,7 @@ def render_main_window():
 
         dpg.add_slider_int(label='Length', tag='password_length', default_value=12, min_value=6, max_value=32, callback=generate_password)
         dpg.add_checkbox(label='Auto Generate Password', callback=generate_password, tag='auto_generate_toggle')
+        dpg.add_checkbox(label='Auto Copy Password', callback=generate_password, tag='auto_copy_toggle')
 
         with dpg.group(horizontal=True):
             dpg.add_checkbox(label='Uppercase', default_value=True, tag='include_uppercase', callback=generate_password)

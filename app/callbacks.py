@@ -34,10 +34,13 @@ def generate_password(sender):
     password = ''.join(random.choice(characters) for _ in range(length))
     dpg.set_value("password_field", password)
 
-def toggle_password_visibility(sender, app_data):
+    if dpg.get_value('auto_copy_toggle'):
+        copy_password()
+
+def toggle_password_visibility():
     dpg.configure_item('password_field', password=not dpg.get_value('show_password'))
 
-def copy_password(sender, app_data):
+def copy_password():
     password = dpg.get_value('password_field')
     if not password:
         dpg.set_value('copy_status', ERROR_PASSWORD_EMPTY)
@@ -45,10 +48,10 @@ def copy_password(sender, app_data):
     dpg.set_clipboard_text(password)
     dpg.set_value('copy_status', INFO_PASSWORD_COPIED)
 
-def exit_app(sender, app_data):
+def exit_app(sender):
     print('Exit PyPass clicked')
     print(f'Sender: {sender}')
     dpg.stop_dearpygui()
 
-def close_exit_dialog(sender, app_data):
+def close_exit_dialog():
     dpg.configure_item('confirm_exit_modal', show=False)
