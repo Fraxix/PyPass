@@ -11,4 +11,4 @@ ERROR_PASSWORD_EMPTY = 'Password field is empty!'
 INFO_PASSWORD_COPIED = "Password successfully copied!"
 
 #App Config
-APP_VERSION = '0.3.0'
+APP_VERSION = '0.4.0'

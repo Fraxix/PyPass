@@ -3,7 +3,11 @@ from app.config import ERROR_NO_CHAR_SELECTED,INFO_PASSWORD_COPIED,ERROR_PASSWOR
 import random
 import string
 
-def generate_password():
+def generate_password(sender):
+
+    if not dpg.get_value('auto_generate_toggle') and sender != 'generate_button':
+        return
+
     include_uppercase = dpg.get_value('include_uppercase')
     include_lowercase = dpg.get_value('include_lowercase')
     include_numbers   = dpg.get_value('include_numbers')
@@ -18,7 +22,7 @@ def generate_password():
         characters += string.digits
     if include_symbols:
         characters += string.punctuation
-    
+
     dpg.set_value('tmp_checkbox_info','')
 
     if not characters:
