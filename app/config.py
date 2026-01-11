@@ -12,4 +12,4 @@ INFO_PASSWORD_COPIED = 'Password successfully copied!'
 INFO_PASSWORD_GENERATED = 'Password successfully generated!'
 
 #App Config
-APP_VERSION = '0.4.3'
+APP_VERSION = '0.4.4'

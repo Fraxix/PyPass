@@ -1,5 +1,6 @@
 import dearpygui.dearpygui as dpg
 from app.callbacks import *
+from app.config import APP_VERSION
 
 def create_default_theme():
     with dpg.theme() as default_theme:
@@ -44,5 +45,5 @@ def render_main_window():
         with dpg.group(horizontal=True):
             dpg.add_text('Status:')
             dpg.add_text('', tag='copy_status')
-
+        dpg.add_text(f'v{APP_VERSION}', color=[180,180,180,255])
         dpg.add_button(label='Exit PyPass',callback=lambda sender, app_data: dpg.configure_item('confirm_exit_modal', show=True))
