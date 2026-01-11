@@ -1,5 +1,5 @@
 import dearpygui.dearpygui as dpg
-from app.config import ERROR_NO_CHAR_SELECTED,INFO_PASSWORD_COPIED,ERROR_PASSWORD_EMPTY
+from app.config import ERROR_NO_CHAR_SELECTED,INFO_PASSWORD_COPIED,ERROR_PASSWORD_EMPTY, INFO_PASSWORD_GENERATED
 import secrets
 import string
 
@@ -18,6 +18,7 @@ def get_characters():
 def generate_password(sender):
     if sender != 'generate_button' and not dpg.get_value('auto_generate_toggle'):
         return
+    dpg.set_value('tmp_password_generated_info', '')
     
     characters = get_characters()
     if not characters:
@@ -29,16 +30,14 @@ def generate_password(sender):
     
     length = dpg.get_value('password_length')
     password = ''.join(secrets.choice(characters) for _ in range(length))
-    dpg.set_value("password_field", password)
+    dpg.set_value('password_field', password)
+    dpg.set_value('tmp_password_generated_info', INFO_PASSWORD_GENERATED)
 
     if dpg.get_value('auto_copy_toggle'):
         copy_password()
 
 def toggle_password_visibility():
     dpg.configure_item('password_field', password=not dpg.get_value('show_password'))
-
-def clear_status():
-    dpg.set_value('copy_status','')
 
 def copy_password():
     password = dpg.get_value('password_field')

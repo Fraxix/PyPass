@@ -24,6 +24,7 @@ def render_main_window():
         with dpg.group(horizontal=True):
             dpg.add_input_text(label='', default_value='Your password will appear here', tag='password_field', readonly=True, password=True)
             dpg.add_checkbox(label='Show Password', callback=toggle_password_visibility, tag='show_password')
+        dpg.add_text('', tag='tmp_password_generated_info')
 
         dpg.add_slider_int(label='Length', tag='password_length', default_value=12, min_value=6, max_value=32, callback=generate_password)
         dpg.add_checkbox(label='Auto Generate Password', callback=generate_password, tag='auto_generate_toggle')
@@ -35,7 +36,7 @@ def render_main_window():
             dpg.add_checkbox(label='Numbers', default_value=True, tag='include_numbers',callback=generate_password)
             dpg.add_checkbox(label='Symbols', default_value=True, tag='include_symbols', callback=generate_password)
         
-        dpg.add_text("", tag='tmp_checkbox_info')
+        dpg.add_text('', tag='tmp_checkbox_info')
 
         dpg.add_button(label='Generate Password', callback=generate_password, tag='generate_button')
         dpg.add_button(label='Copy password', callback=copy_password)
