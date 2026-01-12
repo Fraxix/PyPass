@@ -2,6 +2,8 @@ import dearpygui.dearpygui as dpg
 from app.config import ERROR_NO_CHAR_SELECTED,INFO_PASSWORD_COPIED,ERROR_PASSWORD_EMPTY, INFO_PASSWORD_GENERATED
 import secrets
 import string
+import os
+import sys
 
 def get_characters():
     characters = ""
@@ -52,3 +54,7 @@ def exit_app():
 
 def close_exit_dialog():
     dpg.configure_item('confirm_exit_modal', show=False)
+
+def restart_app():
+    dpg.stop_dearpygui()
+    os.execv(sys.executable, [sys.executable] + sys.argv)
